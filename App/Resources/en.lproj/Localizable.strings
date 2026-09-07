@@ -1,0 +1,166 @@
+/* Root */
+"root.title" = "Spades";
+"root.play" = "Play";
+"root.career" = "Career";
+"root.settings" = "Settings";
+
+"common.ok" = "OK";
+"common.cancel" = "Cancel";
+
+/* Seats */
+"seat.you" = "You";
+"seat.empty" = "Empty";
+"seat.hint" = "Tap to send a reaction. Touch and hold to mute.";
+"seat.a11y %@ %@ %lld" = "%1$@, bid %2$@, %3$lld tricks taken";
+"seat.a11y.noBid %@ %lld" = "%1$@, no bid yet, %2$lld tricks taken";
+
+/* Score bar */
+"score.us" = "Us";
+"score.them" = "Them";
+"score.bags %lld" = "%lld bags";
+"score.target %lld" = "To %lld";
+"score.hand %lld" = "Hand %lld";
+
+/* Table */
+"table.chat" = "Say";
+"table.illegalPlay" = "You must follow suit.";
+"table.rejected" = "That move isn't allowed right now.";
+"table.spades %@" = "Spades %@";
+"table.spades.broken" = "broken";
+"table.spades.unbroken" = "not broken";
+"table.quit.title" = "Leave the match?";
+"table.quit.confirm" = "Leave and forfeit";
+"table.quit.message" = "You'll forfeit your stake and your win streak takes a hit.";
+"table.substituted %@" = "%@ is filling in for a disconnected player.";
+"table.reconnected %@" = "%@ is back.";
+
+/* Bidding */
+"bid.prompt" = "Your bid";
+"bid.nil" = "Nil";
+"bid.blindNil" = "Blind nil";
+"bid.blindNil.title" = "Bid blind nil?";
+"bid.blindNil.confirm" = "Bid blind";
+"bid.blindNil.message" = "Blind nil is declared before you look at your hand. Two hundred points if you take no tricks, minus two hundred if you take one.";
+
+/* Hand summary */
+"hand.complete" = "Hand complete";
+"hand.continue" = "Next hand";
+"hand.contract %lld %lld" = "Bid %1$lld, took %2$lld";
+"hand.nil %lld" = "Nil %lld";
+"hand.bagPenalty" = "Bag penalty";
+"hand.bagsNow %lld" = "%lld bags";
+
+/* Match result */
+"match.won" = "You win";
+"match.lost" = "You lose";
+"match.finalScore %lld %lld" = "%1$lld to %2$lld";
+"match.done" = "Done";
+
+/* Social */
+"social.from %@" = "From %@";
+"reaction.to %@" = "React to %@";
+"reaction.muteHint" = "Touch and hold a player to mute them, or hide reactions entirely in Settings.";
+"reaction.thumbsUp" = "Thumbs up";
+"reaction.thumbsDown" = "Thumbs down";
+"reaction.laughing" = "Laughing";
+"reaction.crying" = "Crying";
+"reaction.angry" = "Angry";
+
+"quickphrase.hi" = "Hi!";
+"quickphrase.hello" = "Hello";
+"quickphrase.goodLuck" = "Good luck";
+"quickphrase.niceHand" = "Nice hand";
+"quickphrase.wellPlayed" = "Well played";
+"quickphrase.sorry" = "Sorry";
+"quickphrase.yourTurn" = "Your turn";
+"quickphrase.goodGame" = "Good game";
+"quickphrase.thanks" = "Thanks";
+"quickphrase.oops" = "Oops";
+"quickphrase.close" = "So close";
+"quickphrase.rematch" = "Rematch?";
+
+/* Lobby */
+"lobby.title" = "New match";
+"lobby.table" = "Table";
+"lobby.humans" = "Human players";
+"lobby.humans.1" = "1 — you vs three bots";
+"lobby.humans.2" = "2 humans";
+"lobby.humans.3" = "3 humans";
+"lobby.humans.4" = "4 humans";
+"lobby.arrangement" = "Seating";
+"lobby.arrangement.partners" = "Partners";
+"lobby.arrangement.opponents" = "Opponents";
+"lobby.difficulty" = "Bot difficulty";
+"lobby.stake" = "Stake";
+"lobby.entryPayout %lld %lld" = "Entry %1$lld · Win %2$lld";
+"lobby.locked %lld" = "Unlocks at %lld lifetime points";
+"lobby.soloDiscount" = "Solo games against bots pay and cost 40% of the listed amounts.";
+"lobby.houseRules" = "House rules";
+"lobby.start" = "Start match";
+
+"difficulty.easy" = "Easy";
+"difficulty.medium" = "Medium";
+"difficulty.hard" = "Hard";
+
+"stake.casual" = "Casual";
+"stake.bronze" = "Bronze";
+"stake.silver" = "Silver";
+"stake.gold" = "Gold";
+"stake.elite" = "Elite";
+
+/* House rules */
+"rules.title" = "House rules";
+"rules.scoring" = "Scoring";
+"rules.target" = "Play to";
+"rules.bagThreshold %lld" = "Bag penalty at %lld";
+"rules.bagPenalty %lld" = "Penalty is %lld points";
+"rules.nil" = "Nil";
+"rules.blindNil" = "Allow blind nil";
+"rules.nilTricksCountForPartner" = "Failed nil's tricks count for partner";
+"rules.play" = "Play";
+"rules.twoOfClubs" = "Two of clubs must lead";
+
+/* Career */
+"career.title" = "Career";
+"career.points" = "Points";
+"career.lifetime" = "Lifetime earned";
+"career.record" = "Record";
+"career.played" = "Games played";
+"career.won" = "Games won";
+"career.winRate" = "Win rate";
+"career.streak" = "Current streak";
+"career.bestStreak" = "Best streak";
+"career.nils" = "Nils";
+"career.nilsMade" = "Made";
+"career.nilsFailed" = "Failed";
+"career.bonuses" = "Bonuses";
+"career.dailyStreak" = "Daily streak";
+"career.nextBonus" = "Next daily bonus";
+"career.watchForPoints %lld" = "Watch for +%lld";
+"career.adsRemaining %lld" = "%lld left today";
+"career.pointsDisclaimer" = "Points are for entertainment only. They can't be bought, cashed out, or transferred.";
+
+/* Settings */
+"settings.title" = "Settings";
+"settings.sound" = "Sound";
+"settings.sfx" = "Sound effects";
+"settings.sfxVolume" = "Effects volume";
+"settings.music" = "Music";
+"settings.musicVolume" = "Music volume";
+"settings.haptics" = "Haptics";
+"settings.appearance" = "Appearance";
+"settings.deck" = "Deck colours";
+"settings.deck.footer" = "The four-colour deck gives each suit its own colour, which is easier to read if you're colourblind.";
+"settings.social" = "Reactions and chat";
+"settings.hideReactions" = "Hide all reactions";
+"settings.unmuteAll" = "Unmute everyone";
+"settings.social.footer" = "Touch and hold a player at the table to mute just them.";
+"settings.about" = "About";
+"about.audioCredit" = "Sound effects by kenney.nl, released under CC0.";
+
+"deck.classic" = "Classic";
+"deck.fourColour" = "Four colour";
+
+/* Daily bonus */
+"bonus.title %lld" = "Daily bonus: +%lld";
+"bonus.streak %lld" = "Day %lld of your streak";

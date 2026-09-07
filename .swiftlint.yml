@@ -1,0 +1,79 @@
+# Run with `make lint`, which uses --strict: every warning is a failure.
+
+included:
+  - App
+  - Packages/SpadesEngine/Sources
+  - Tests
+
+excluded:
+  - .build
+  - DerivedData
+  - Packages/SpadesEngine/.build
+
+line_length:
+  warning: 100
+  error: 140
+  ignores_comments: false
+  ignores_urls: true
+
+type_body_length:
+  warning: 300
+  error: 450
+
+file_length:
+  warning: 500
+  error: 700
+
+function_body_length:
+  warning: 60
+  error: 100
+
+cyclomatic_complexity:
+  warning: 12
+  error: 20
+
+identifier_name:
+  min_length: 2
+  excluded: [id, to, up, a, b, x, y]
+
+nesting:
+  type_level: 2
+
+disabled_rules:
+  - todo
+
+opt_in_rules:
+  - array_init
+  - closure_spacing
+  - collection_alignment
+  - contains_over_filter_count
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - explicit_init
+  - fatal_error_message
+  - first_where
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - joined_default_parameter
+  - last_where
+  - literal_expression_end_indentation
+  - multiline_arguments
+  - operator_usage_whitespace
+  - overridden_super_call
+  - prefer_self_type_over_type_of_self
+  - redundant_nil_coalescing
+  - sorted_first_last
+  - toggle_bool
+  - unneeded_parentheses_in_closure_argument
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
+
+custom_rules:
+  no_shared_singletons:
+    name: "No .shared singletons"
+    regex: '\.shared\b'
+    match_kinds: [identifier]
+    message: "Services are injected through the SwiftUI environment, not reached through .shared (§14). AVAudioSession.sharedInstance() is the framework's own API and is fine."
+    severity: warning
+    excluded: ".*AudioService\\.swift"
