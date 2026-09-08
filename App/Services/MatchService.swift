@@ -1,4 +1,8 @@
 import Foundation
+import SpadesEconomy
+// TODO: drop @preconcurrency once GameKit's Sendable annotations land.
+// It is a stopgap for incomplete upstream annotations, not a general way to
+// silence concurrency diagnostics — it must not spread to another file.
 @preconcurrency import GameKit
 import Observation
 import SpadesEngine
@@ -47,9 +51,12 @@ protocol MatchTransport: AnyObject {
 }
 
 /// How long a disconnected seat is held open before the seat is forfeited.
-/// A reconnect inside this window is not a quit and costs no stake (§9).
+///
+/// The number itself lives in `SpadesEconomy.ReconnectPolicy`, because what
+/// separates a dropped connection from an abandoned match is an economic rule,
+/// not a transport detail.
 enum MatchReconnect {
-    static let graceWindow: Duration = .seconds(90)
+    static var graceWindow: Duration { .seconds(ReconnectPolicy.graceWindowSeconds) }
 }
 
 // MARK: - GameKit

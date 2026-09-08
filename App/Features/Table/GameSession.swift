@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import SpadesEconomy
 import SpadesEngine
 
 /// The one object that turns a pure `GameState` into a game.
@@ -364,9 +365,11 @@ final class GameSession {
         settled = true
         let won = winner == localSeat.team
         audio.play(won ? .gameWon : .gameLost)
+        // The engine produced a winning `Team`; the economy is handed a
+        // `MatchOutcome` and never sees the game state (§4).
         career.settle(
             tier: config.stake,
-            outcome: won ? .win : .loss,
+            outcome: won ? MatchOutcome.win : .loss,
             soloVsBots: config.isSoloVsBots
         )
         if won { audio.play(.pointsAwarded) }
@@ -381,7 +384,7 @@ final class GameSession {
         guard !settled, !state.isFinished else { return }
         settled = true
         botTask?.cancel()
-        career.settle(tier: config.stake, outcome: .quit, soloVsBots: config.isSoloVsBots)
+        career.settle(tier: config.stake, outcome: MatchOutcome.quit, soloVsBots: config.isSoloVsBots)
         try? persistence.remove(.matchInProgress)
     }
 

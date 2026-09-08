@@ -1,4 +1,5 @@
 import Foundation
+import SpadesEconomy
 import SpadesEngine
 
 /// How a table is set up before the first card is dealt.

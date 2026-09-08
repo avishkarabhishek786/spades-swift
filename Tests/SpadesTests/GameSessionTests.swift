@@ -1,4 +1,5 @@
 import Foundation
+import SpadesEconomy
 import SpadesEngine
 import Testing
 @testable import Spades

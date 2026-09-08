@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import SpadesEngine
 
@@ -73,12 +74,34 @@ struct TrickTests {
 @Suite("Cards and deck")
 struct CardTests {
 
+    /// Regression: `Card.id` once returned 0–53 rather than 0–51, and crashed
+    /// the first time a bot used it to index a fifty-two element table.
     @Test("Card ids are a dense zero-based index over the whole deck")
     func idsAreDense() {
-        // Bots and the renderer both index 52-element tables by `Card.id`.
         let ids = Deck.full.cards.map(\.id)
         #expect(ids.count == 52)
         #expect(Set(ids) == Set(0..<52))
+        #expect(ids.min() == 0)
+        #expect(ids.max() == 51)
+
+        // Use them the way `TableKnowledge` does: as array subscripts.
+        var table = [Bool](repeating: false, count: 52)
+        for card in Deck.full.cards {
+            #expect(table.indices.contains(card.id), "\(card) has id \(card.id), outside a 52-slot table")
+            table[card.id] = true
+        }
+        #expect(table.allSatisfy { $0 }, "Every slot should be claimed exactly once")
+    }
+
+    @Test("A card id survives an encode and decode round trip")
+    func idRoundTrip() throws {
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+        for card in Deck.full.cards {
+            let decoded = try decoder.decode(Card.self, from: encoder.encode(card))
+            #expect(decoded == card)
+            #expect(decoded.id == card.id)
+        }
     }
 
     @Test("A fresh deck holds every card exactly once, in canonical order")

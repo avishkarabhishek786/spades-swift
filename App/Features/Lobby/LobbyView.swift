@@ -1,3 +1,4 @@
+import SpadesEconomy
 import SpadesEngine
 import SwiftUI
 
@@ -83,7 +84,7 @@ struct LobbyView: View {
     }
 
     private func stakeRow(_ tier: StakeTier) -> some View {
-        let selectable = Economy.isSelectable(tier, profile: career.profile, soloVsBots: soloVsBots)
+        let selectable = career.isSelectable(tier, soloVsBots: soloVsBots)
         let unlocked = career.isUnlocked(tier)
 
         return Button {

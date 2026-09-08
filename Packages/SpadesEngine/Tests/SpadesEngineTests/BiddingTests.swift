@@ -139,6 +139,30 @@ struct BiddingTests {
         }
     }
 
+    @Test("A partner's nil does not lower the minimum for the other partner")
+    func teamMinimumSurvivesPartnerNil() {
+        var rules = RulesConfig.standard
+        rules.minBidPerTeam = 4
+        var state = bidding(rules: rules)
+
+        state = try! reduce(state, .bid(seat: .one, bid: .nilBid))
+        state = try! reduce(state, .bid(seat: .two, bid: .tricks(5)))
+
+        // Seat 3 completes team oneThree. Its partner's nil contributes nothing
+        // to the contract, so seat 3 must reach the whole minimum alone —
+        // otherwise "partner bids nil" becomes the standard route around the
+        // rule and the anti-sandbagging measure has no teeth (§5).
+        let legal = LegalMoves.legalBids(state: state, seat: .three)
+        #expect(!legal.contains(.tricks(3)))
+        #expect(legal.contains(.tricks(4)))
+        #expect(throws: GameError.illegalBid(.tricks(3), seat: .three)) {
+            _ = try reduce(state, .bid(seat: .three, bid: .tricks(3)))
+        }
+        #expect(throws: Never.self) {
+            _ = try reduce(state, .bid(seat: .three, bid: .tricks(4)))
+        }
+    }
+
     @Test("Nil is exempt from a team minimum")
     func teamMinimumExemptsNil() {
         var rules = RulesConfig.standard

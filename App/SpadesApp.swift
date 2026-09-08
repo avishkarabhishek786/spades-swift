@@ -1,3 +1,4 @@
+import SpadesEconomy
 import SpadesEngine
 import SwiftUI
 
@@ -130,7 +131,7 @@ struct RootView: View {
 }
 
 struct DailyBonusBanner: View {
-    let award: DailyBonus.Evaluation
+    let award: DailyBonusResult
     var onDismiss: () -> Void
 
     var body: some View {

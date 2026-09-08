@@ -1,6 +1,6 @@
 import Foundation
 import Observation
-import SpadesEngine
+import SpadesEconomy
 
 /// Rewarded video, behind a protocol so the app builds, runs and tests with no
 /// ad SDK present at all.
@@ -24,23 +24,16 @@ final class AdService {
 
     private let provider: any AdProviding
     private let career: CareerStore
-    private let calendar: Calendar
-    private let now: @Sendable () -> Date
+    private let clock: CalendarClock
 
-    init(
-        provider: any AdProviding,
-        career: CareerStore,
-        calendar: Calendar = .current,
-        now: @escaping @Sendable () -> Date = { Date() }
-    ) {
+    init(provider: any AdProviding, career: CareerStore, clock: CalendarClock = CalendarClock()) {
         self.provider = provider
         self.career = career
-        self.calendar = calendar
-        self.now = now
+        self.clock = clock
     }
 
     var remainingToday: Int {
-        AdReward.remainingToday(profile: career.profile, now: now(), calendar: calendar)
+        AdReward.remainingToday(profile: career.profile, dayKey: clock.dayKey)
     }
 
     var rewardAmount: Int { AdReward.pointsPerView }
@@ -49,7 +42,7 @@ final class AdService {
     ///
     /// With no network the provider never becomes ready, so the button simply
     /// does not appear. Showing an error for something the player did not ask
-    /// for is worse than showing nothing (§9).
+    /// for is worse than showing nothing.
     var canOfferReward: Bool {
         provider.isReady && remainingToday > 0 && !isPresenting
     }
@@ -68,7 +61,7 @@ final class AdService {
             guard let self else { return }
             // Reached only from the SDK's reward callback. Granting on
             // dismissal would pay out for an ad that was skipped.
-            let updated = AdReward.grant(profile: career.profile, now: now(), calendar: calendar)
+            let updated = AdReward.grant(profile: career.profile, dayKey: clock.dayKey)
             let delta = updated.points - career.profile.points
             career.apply(updated)
             lastGrant = delta > 0 ? delta : nil
@@ -80,13 +73,13 @@ final class AdService {
     func acknowledgeGrant() { lastGrant = nil }
 }
 
-/// The default provider. Never ready, so the reward button stays hidden and
-/// the app builds without the AdMob SDK linked.
+/// The default provider. Never ready, so the reward button stays hidden and the
+/// app builds without the AdMob SDK linked.
 ///
-/// Swapping in the real provider is a matter of implementing `AdProviding`
-/// against `GADRewardedAd` and handing it to `AdService`. Two things must
-/// survive that swap: the reward fires on the SDK's reward callback only, and
-/// App Tracking Transparency is requested contextually rather than on launch.
+/// Swapping in the real provider means implementing `AdProviding` against
+/// `GADRewardedAd`. Two things must survive that swap: the reward fires on the
+/// SDK's reward callback only, and App Tracking Transparency is requested
+/// contextually rather than on launch.
 @MainActor
 final class StubAdService: AdProviding {
     /// Set in tests to exercise the reward path.

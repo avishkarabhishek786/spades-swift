@@ -38,6 +38,8 @@ targets:
     dependencies:
       - package: SpadesEngine
         product: SpadesEngine
+      - package: SpadesEngine
+        product: SpadesEconomy
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.spades
@@ -74,6 +76,8 @@ targets:
       - target: Spades
       - package: SpadesEngine
         product: SpadesEngine
+      - package: SpadesEngine
+        product: SpadesEconomy
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
