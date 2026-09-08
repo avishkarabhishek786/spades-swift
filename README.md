@@ -4,7 +4,9 @@ A native iOS Spades game. Four seats, two partnerships, 13-card hands, spades
 always trump. Any seat can be a human or a bot, so solo play, pass-and-play and
 online multiplayer all run through one code path.
 
-See [CLAUDE.md](CLAUDE.md) for the specification this implements.
+See [CLAUDE.md](CLAUDE.md) for the specification this implements, and
+[DEVLOG.md](DEVLOG.md) for the build record — what broke, what was measured,
+and which decisions the numbers forced.
 
 ## Status
 
